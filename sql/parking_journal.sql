@@ -1,0 +1,1 @@
+--should contain [ts_start, ts_end, user_phone_number, money]

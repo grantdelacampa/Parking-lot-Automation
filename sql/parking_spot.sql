@@ -1,0 +1,1 @@
+--should contain [id, floor, area, spot, is_taken, user_phone_number]
