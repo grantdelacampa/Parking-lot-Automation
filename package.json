@@ -1,0 +1,25 @@
+{
+  "name": "parking-lot-automation",
+  "version": "0.0.0",
+  "description": "Parking Lot Automation project for CSC131",
+  "main": "app.js",
+  "scripts": {
+    "server": "gulp serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobPVoronin/csc131.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JacobPVoronin/csc131/issues"
+  },
+  "homepage": "https://github.com/JacobPVoronin/csc131#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-webserver": "^0.9.1"
+  }
+}
