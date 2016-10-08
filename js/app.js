@@ -4,7 +4,7 @@
         .module(
             'parkingLotAutomationApp', // Name of the app
             [ // Dependencies
-                'ngRoute'
+                'ui.router'
             ]
         );
 })();
