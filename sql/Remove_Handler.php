@@ -5,9 +5,9 @@
  * Date: 10/18/2016
  * Time: 3:36 PM
  */
-$link =mysqli_connect("athena.csus.edu", "zainchevsky_user","zainchevsky_db","zainchevsky");
-if(!$link)
-    echo "Error unable to connect to MySQL";
+
+/**connects to database*/
+include_once 'Db_connect.php';
 
 function remove_from_user_table($phone, $user)
 {
