@@ -2,18 +2,16 @@
 /**
  * Created by IntelliJ IDEA.
  * User: Grant Delacampa
- * Date: 10/18/2016
- * Time: 6:25 PM
- */
-/**connects to database*/
-
-/**TO DO
- * Implement echo statement to adjust and account for varied input in sql_command
- * change output to appropriate format for output in front end.
- * allow use with all DB tables and data*?
+ * Date: 10/20/2016
+ * Time: 3:05 PM
+ * Contains the following functions:
+ * Read(S$QL)
+ * wr() stands for write/remove
+ * All accept MySQL code as input
  */
 
 include_once 'Db_connect.php';
+
 
 Function read($sql_command)
 {
@@ -24,20 +22,32 @@ Function read($sql_command)
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
+
+            /**Echos table date for testing purposes*/
             echo "id: " . $row["id"]. " - spot: " . $row["spot"]. " ". "<br>";
             /**run switch statement function to run through echo function's.*/
+
+            /**returns row for implimentation in the system*/
+            return $row;
+
         }
     } else {
         echo "0 results";
     }
 }
 
-/**test environemnt*/
+/**Write and Read function*/
+function wr($sql_command)
+{
+    global $link;
+    $sql = $sql_command;
+    if ($link->query($sql) === true) {
+        echo "Records Altered";
+    } else {
+        echo "Error: " . $sql . "<br>" . $link->error;
+    }
+}
 
-/**variable command example to read data from MySql*/
-read("SELECT id, area, spot FROM parking_spot");
 
-/**end test environemnt*/
-mysqli_close($link);
-
+mysqli_close($link)
 ?>
