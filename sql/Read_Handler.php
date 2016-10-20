@@ -7,22 +7,37 @@
  */
 /**connects to database*/
 
+/**TO DO
+ * Implement echo statement to adjust and account for varied input in sql_command
+ * change output to appropriate format for output in front end.
+ * allow use with all DB tables and data*?
+ */
+
 include_once 'Db_connect.php';
 
-Function read_parking_journal()
+Function read($sql_command)
 {
     global $link;
-    /**$sql = 'SELECT money, tutorial_title,
-               tutorial_author, submission_date
-        FROM read_parking_journal';*/
+    $sql = $sql_command;                    /**allows variable commands to be sent to MySQL*/
+    $result = $link->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "id: " . $row["id"]. " - spot: " . $row["spot"]. " ". "<br>";
+            /**run switch statement function to run through echo function's.*/
+        }
+    } else {
+        echo "0 results";
+    }
 }
 
-Function read_parking_spot()
-{
-    global $link;
-}
+/**test environemnt*/
 
-Function user_table()
-{
-    global $link;
-}
+/**variable command example to read data from MySql*/
+read("SELECT id, area, spot FROM parking_spot");
+
+/**end test environemnt*/
+mysqli_close($link);
+
+?>
