@@ -5,49 +5,65 @@
  * Date: 10/20/2016
  * Time: 3:05 PM
  * Contains the following functions:
- * Read(S$QL)
- * wr() stands for write/remove
+ * read(SQL query)
+ * alert(SQL query) stands for write/remove
  * All accept MySQL code as input
  */
 
 include_once 'Db_connect.php';
 
+$db_connection = connectToDB();
 
-Function read($sql_command)
+function read($sql_command)
 {
-    global $link;
-    $sql = $sql_command;                    /**allows variable commands to be sent to MySQL*/
-    $result = $link->query($sql);
+    global $link; // Using global $link
 
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
+    $db_result = $link->query($sql_command); // Run query
 
-            /**Echos table date for testing purposes*/
-            echo "id: " . $row["id"]. " - spot: " . $row["spot"]. " ". "<br>";
-            /**run switch statement function to run through echo function's.*/
-
-            /**returns row for implimentation in the system*/
-            return $row;
-
+    if (!$db_result) {
+        $response = array(
+            'type' => 'error',
+            'value' => 'Error: unable to run MySQL query.'
+        );
+    } else {
+        if ($db_result->num_rows > 0) {
+            $records = array();
+            while ($row = $db_result->fetch_assoc()) { // Output data of each row
+                $records[] = $row;
+            }
+            $response = array(
+                'type' => 'success',
+                'value' => 'Successfully got data from DB.',
+                'records' => $records
+            );
+        } else {
+            $response = array(
+                'type' => 'error',
+                'value' => 'Error: no record.'
+            );
         }
-    } else {
-        echo "0 results";
     }
+    return $response;
 }
 
-/**Write and Read function*/
-function wr($sql_command)
+function alert($sql_command)
 {
-    global $link;
-    $sql = $sql_command;
-    if ($link->query($sql) === true) {
-        echo "Records Altered";
+    global $link; // Using global $link
+
+    $db_result = $link->query($sql_command); // Run query
+
+    if (!$db_result) {
+        $response = array(
+            'type' => 'error',
+            'value' => 'Error: unable to run MySQL query.'
+        );
     } else {
-        echo "Error: " . $sql . "<br>" . $link->error;
+        $response = array(
+            'type' => 'success',
+            'value' => 'Successfully changed data in DB.'
+        );
     }
+    return $response;
 }
 
-
-mysqli_close($link)
-?>
+mysqli_close($link); // Must close connection
