@@ -5,6 +5,6 @@ create table parking_spot
   floor SMALLINT not null,
   area  smallint not null,
   spot smallint not null,
-  is_taken bit not null check (is_taken=1 OR is_taken=0),
+  is_taken bit ,
   user_phone_number smallint NOT NULL CHECK (LENGTH(user_phone_number)>=1000000000),
 }
