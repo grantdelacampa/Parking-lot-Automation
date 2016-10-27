@@ -43,6 +43,7 @@ function read($sql_command)
             );
         }
     }
+    mysqli_close($link); // Must close connection
     return $response;
 }
 
@@ -55,7 +56,8 @@ function alert($sql_command)
     if (!$db_result) {
         $response = array(
             'type' => 'error',
-            'value' => 'Error: unable to run MySQL query.'
+            'value' => 'Error: unable to run MySQL query.',
+            'error_details' => $link->error
         );
     } else {
         $response = array(
@@ -63,7 +65,6 @@ function alert($sql_command)
             'value' => 'Successfully changed data in DB.'
         );
     }
+    mysqli_close($link); // Must close connection
     return $response;
 }
-
-mysqli_close($link); // Must close connection

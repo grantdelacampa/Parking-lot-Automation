@@ -7,13 +7,10 @@
  */
 include_once 'sql_config.php';
 
-$link = '';
-
 function connectToDB()
 {
     global $link;
-    $link = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-    if (!$link)
+    if (!$link = mysqli_connect(HOST, USER, PASSWORD, DATABASE))
         $response = array(
             'type' => 'error',
             'value' => 'Error: unable to connect to MySQL.',
