@@ -6,7 +6,7 @@
  * Time: 3:05 PM
  * Contains the following functions:
  * read(SQL query)
- * alert(SQL query) stands for write/remove
+ * alert(SQL query) write/remove
  * All accept MySQL code as input
  */
 
