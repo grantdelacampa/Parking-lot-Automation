@@ -5,17 +5,19 @@
             'parkingLotAutomationApp' // Name of the app
         )
         .controller(
-            'homeController',
+            'signUpController',
             function ($scope, $http) {
-                $scope.addUser = function () {
+                $scope.signUp = function () {
                     var request = {
                         method: 'POST',
                         url: 'http://api.localhost/json/response.php',
                         data: {
                             request: 'add_user',
                             data: {
-                                'name': 'testName',
-                                'tel': '123123123'
+                                'email': $scope.newUser.email,
+                                'fullName': $scope.newUser.fullName,
+                                'telephone': $scope.newUser.telephone,
+                                'password': $scope.newUser.password
                             }
                         }
                     };
@@ -27,21 +29,6 @@
                         }
                     )
                 };
-                $scope.addUser();
-            }
-        )
-        .controller(
-            'qrCodeController',
-            function ($scope) {
-                $scope.buildQRCode = function () {
-                    var qrcode = new QRCode(document.getElementById('qr-code'), {
-                        width: 100,
-                        height: 100
-                    });
-                    qrcode.makeCode('2DE3FF482F');
-                };
-
-                $scope.buildQRCode();
             }
         );
 })();
