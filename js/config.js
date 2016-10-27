@@ -27,7 +27,7 @@
                             views: {
                                 'main': {
                                     templateUrl: 'pages/sign-up.html',
-                                    controller: 'homeController'
+                                    controller: 'signUpController'
                                 }
                             }
                         }
@@ -75,7 +75,7 @@
                             views: {
                                 'main': {
                                     templateUrl: 'pages/qr-code.html',
-                                    controller: 'homeController'
+                                    controller: 'qrCodeController'
                                 }
                             }
                         }
