@@ -1,0 +1,47 @@
+<?php
+// Headers to allow cross-domain communication
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+$data = file_get_contents("php://input"); // Get AJAX input
+if ($data) { // If is it AJAX call with data
+    $response = array();
+    $json = json_decode($data);
+    if (is_null($json)) { // Error: JSON not valid
+        $response = array(
+            'type' => 'error',
+            'value' => 'Invalid JSON.'
+        );
+    } else {
+        $request = $json->request;
+        $data = $json->data;
+        $response = getResponse($request, $data);
+    }
+    header('content-type: application/json; charset=utf-8');
+    $encoded = json_encode($response);
+    exit($encoded);
+} else { // Otherwise, error: Forbidden
+    //echo $data;
+    http_response_code(403);
+    exit('HTTP/1.1 403 Forbidden');
+}
+
+function getResponse($request, $data)
+{
+    switch ($request) {
+        case 'add_user':
+            include '../php/userFunctions.php';
+            return addUser($data);
+            break;
+        case 'opt_in':
+            include '../php/parkingFunctions.php';
+            return optIn($data);
+            break;
+        default:
+            return array(
+                'type' => 'error',
+                'value' => 'Invalid request.',
+                'request' => $request
+            );
+    }
+}
