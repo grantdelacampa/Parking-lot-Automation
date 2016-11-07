@@ -1,28 +1,24 @@
+<head>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <div class="dropdown open">
+            <button id="dropdownMenuButton" type="button" class="btn dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Menu
             </button>
-            <a class="navbar-brand" href="#">PLA</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a ui-sref="sign-up">Sign Up</a></li>
-                <li><a ui-sref="log-in">Log In</a></li>
-                <li><a ui-sref="log-out">Log Out</a></li>
-                <li><a ui-sref="status">Status</a></li>
-                <li><a ui-sref="records">Records</a></li>
-                <li><a ui-sref="qr-code">QR Code</a></li>
-                <li><a ui-sref="connected-card">Connected Card</a></li>
-            </ul>
-        </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" ui-sref="sign-up">Sign Up</a></li>
+                <li><a class="dropdown-item" ui-sref="log-in">Log In</a></li>
+                <li><a class="dropdown-item" ui-sref="log-out">Log Out</a></li>
+                <li><a class="dropdown-item" ui-sref="status">Status</a></li>
+                <li><a class="dropdown-item" ui-sref="records">Records</a></li>
+                <li><a class="dropdown-item" ui-sref="qr-code">QR Code</a></li>
+                <li><a class="dropdown-item" ui-sref="connected-card">Connected Card</a></li>
+             </div>
+         </div>
+            </div>
     </div>
 </nav>
