@@ -8,26 +8,25 @@
 /**
  * Documentation:
  *      Calls SQL_handler to speak with the database
- *      Accepts three values for floor number, spots, and quadrants
+ *      Accepts two values for floor number, and spots.
  *      Utilizes loops to build database alerts and "builds" a parking garage
  *      Contains:
  *          private function DBErrorHandler
- *
- * NOTES:
- * $link is established inside the first for loop to stop the MySQL timeout
- * at the end of the first for loop the connection is closed and the program sleeps
- * after 10 seconds the loop wakes and connects to the database once more it then
- * runs again repeating this one time for every floor.
+ *          private function toLetter($var)
  *
  */
-set_time_limit(30);  //defaults 30s
+
+include_once '../sql/Db_connect.php';
+
+set_time_limit(60);  //PHP standardized timeout is 25 or 30s
 $alpha = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+//array MUST consist of elements in single quotations
 $floors = 4;
 $spots = 100;
+connectToDB();
+
 for ($i=1; $i <= $floors; $i++){
-    $time_start = microtime(true);
-    echo "connection established<br>";
-    //$link = mysqli_connect("Athena.csus.edu", "zainchevsky_user", "zainchevsky_db", "zainchevsky");
+    $time_start = microtime(true); //start timer
         for ($k=1;$k<=$spots; $k++){
             $letter= toLetter($k); //converts the quad count to its corresponding letter
             //$letter = mysqli_real_escape_string($link,$letter);
@@ -36,44 +35,33 @@ for ($i=1; $i <= $floors; $i++){
             . " VALUES ('$i', '$k', '$letter')";  //builds database
             $link->query($SQLQuery);
         }
-    //mysqli_close($link); // Must close connection
-    $time_end = microtime(true);
-    $execution_time = $time_end - $time_start;
-    echo 'Execution time:  '.$execution_time;
-    if($i!=$floors) {
-        echo "<br>connection closed now sleeping... please wait<br>";
-        sleep(10);
-    }
-    else{
-        echo "<br>Execution Finished Database propagated<br>";
-    }
+    $time_end = microtime(true); //end timer
+    $execution_time = $time_end - $time_start; //calculate run time
+    echo "<br>" . 'Execution time:  '.$execution_time . "<br>";
 }
 
+closeDB();
 
 //outputs char a representation of a numeric input
 function toLetter($var){
         global $alpha;
-    //Scalar function for Quadrants of any size $var
-        $quad1 = $var/4;
-        $quad2 = $quad1*2;
-        $quad3 = $quad1*3;
-        $quad4 = $quad2*2;
+        global $spots;
     //Handles the conversion of $var int to Letter
     switch($var){
-        case $var<=$quad1:
+        case $var <= $spots * .25:  //for 1 to 25 print A
             return $alpha[0];
             break;
-        case $var<=$quad2 && $quad1:
+        case ($var <= $spots * .50) && ($var > $spots * .25): //for 26 to 50 print B
             return $alpha[1];
             break;
-        case $var<=$quad3 && $var>$quad2:
+        case ($var <= $spots * .75) && ($var > $spots * .50): //for 51 to 75 print C
             return $alpha[2];
             break;
-        case $var<=$quad4 && $var>$quad3:
+        case ($var <= $spots) && ($var > $spots * .75): //for 76 to 100 print D
             return $alpha[3];
             break;
         default:
-            return 'Error';
+            return 'Error'; //Sends error into MySQL table when $var<0 or $var>100
     }
 }
 ?>

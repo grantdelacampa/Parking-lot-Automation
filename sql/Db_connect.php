@@ -24,3 +24,9 @@ function connectToDB()
     }
     return $response;
 }
+
+function closeDB()
+{
+    global $link;
+    mysqli_close($link);
+}
