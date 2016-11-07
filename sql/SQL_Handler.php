@@ -14,7 +14,7 @@ include_once 'Db_connect.php';
 
 $db_connection = connectToDB();
 
-function read($sql_command)
+function read($sql_command, $close)
 {
     global $link; // Using global $link
 
