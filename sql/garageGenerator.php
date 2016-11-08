@@ -7,7 +7,9 @@
  */
 /**
  * Documentation:
- *      Calls SQL_handler to speak with the database
+ *      Alters PHP timeout to 60s.
+ *      Calls Db_connect to speak with the database.
+ *      omitted SQL_Handler to prevent redundant calls.
  *      Accepts two values for floor number, and spots.
  *      Utilizes loops to build database alerts and "builds" a parking garage
  *      Contains:
@@ -26,23 +28,21 @@ $spots = 100;
 connectToDB();
 
 for ($i=1; $i <= $floors; $i++){
-    $time_start = microtime(true); //start timer
+    //$time_start = microtime(true); //start timer
         for ($k=1;$k<=$spots; $k++){
-            $letter= toLetter($k); //converts the quad count to its corresponding letter
-            //$letter = mysqli_real_escape_string($link,$letter);
-            //echo 'floor: ' . $i . 'spot: ' . $k . 'area: ' . $letter . `<br>`;
+            $letter= toLetter($k); //converts the spot count to quadrants then to its corresponding letter
             $SQLQuery = "INSERT INTO parking_spot (`floor`, `spot`, `area`)"
             . " VALUES ('$i', '$k', '$letter')";  //builds database
             $link->query($SQLQuery);
         }
-    $time_end = microtime(true); //end timer
-    $execution_time = $time_end - $time_start; //calculate run time
-    echo "<br>" . 'Execution time:  '.$execution_time . "<br>";
+    //$time_end = microtime(true); //end timer
+    //$execution_time = $time_end - $time_start; //calculate run time
+    //echo "<br>" . 'Execution time:  '.$execution_time . "<br>";
 }
 
 closeDB();
 
-//outputs char a representation of a numeric input
+//outputs char as representation of a numeric input
 function toLetter($var){
         global $alpha;
         global $spots;
