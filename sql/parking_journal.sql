@@ -1,7 +1,8 @@
---should contain [ts_start, ts_end, user_phone_number, money]
-CREATE TABLE `parking_journal`(
-    `ts_start` DATE NOT NULL,
-    `ts_end` TIME ,
-user_phone_number INT NOT NUll CHECK (LENGTH(user_phone_number)>=1000000000),
-money SMALLINT ,
-)
+CREATE TABLE `parking_journal` (
+    `id` INT(5) NOT NULL AUTO_INCREMENT ,
+    `money` DOUBLE(6) NOT NULL ,
+    `user_phone_number` INT(30) NOT NULL ,
+    `ts_start` TIME NOT NULL ,
+    `ts_end` TIME NOT NULL ,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
