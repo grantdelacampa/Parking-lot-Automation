@@ -78,12 +78,13 @@ function logIn($data)
             'db_response' => $DBResponse
         );
     else {
-        $cookie_value = md5(time() . $telephone);
-        setcookie("session", $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-        return array(
-            'type' => 'success',
-            'value' => 'User is logged in!',
-            'session' => $_COOKIE['session']
-        );
+        session_start();
+        if (session_status() == PHP_SESSION_ACTIVE){
+            $_SESSION["user"] = $telephone;
+            return "Session initialized variables are set.";
+        }
+        else {
+            return "you are a failure:)";
+        }
     }
 }
