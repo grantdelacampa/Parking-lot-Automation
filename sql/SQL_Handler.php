@@ -23,7 +23,9 @@ function read($sql_command)
     if (!$db_result) {
         $response = array(
             'type' => 'error',
-            'value' => 'Error: unable to run MySQL query.'
+            'value' => 'Error: unable to run MySQL query.',
+            'mysqli_error' => mysqli_error($link),
+            'mysqli_errno' => mysqli_errno($link)
         );
     } else {
         if ($db_result->num_rows > 0) {
@@ -57,7 +59,8 @@ function alert($sql_command)
         $response = array(
             'type' => 'error',
             'value' => 'Error: unable to run MySQL query.',
-            'error_details' => $link->error
+            'mysqli_error' => mysqli_error($link),
+            'mysqli_errno' => mysqli_errno($link)
         );
     } else {
         $response = array(
