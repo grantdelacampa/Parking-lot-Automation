@@ -39,7 +39,7 @@
                             views: {
                                 'main': {
                                     templateUrl: 'pages/log-in.html',
-                                    controller: 'homeController'
+                                    controller: 'logInController'
                                 }
                             }
                         }

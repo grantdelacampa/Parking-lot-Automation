@@ -4,19 +4,21 @@
         <br>
         <p>Welcome Back!</p>
     </div>
-        <form class="text-md-center">
+    <form class="text-md-center" ng-submit="logIn()" name="logInForm" novalidate>
         <div class="form-group">
-            <input class="form-control" placeholder="1-(555)-555-5555" type="tel">
+            <input class="form-control" placeholder="1-(555)-555-5555" type="tel" required
+                   ng-model="logIn.telephone">
         </div>
         <div class="form-group">
-            <input class="form-control" placeholder="Password" type="password"></div>
+            <input class="form-control" placeholder="Password" type="password" required
+                   ng-model="logIn.password"></div>
         <div class="form-group">
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button class="btn btn-primary" type="submit">Log in</button>
         </div>
-            <div>
-                <h5>Or
-                    <a ui-sref="sign-up">Sign Up</a>
-                </h5>
-            </div>
+        <div>
+            <h5>or
+                <a ui-sref="sign-up">Sign Up</a>
+            </h5>
+        </div>
     </form>
 </div>
