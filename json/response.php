@@ -13,9 +13,7 @@ if ($data) { // If is it AJAX call with data
             'value' => 'Invalid JSON.'
         );
     } else {
-        $request = $json->request;
-        $data = $json->data;
-        $response = getResponse($request, $data);
+        $response = getResponse($json);
     }
     header('content-type: application/json; charset=utf-8');
     $encoded = json_encode($response);
@@ -26,22 +24,30 @@ if ($data) { // If is it AJAX call with data
     exit('HTTP/1.1 403 Forbidden');
 }
 
-function getResponse($request, $data)
+function getResponse($json)
 {
-    switch ($request) {
+    switch ($json->request) {
         case 'add_user':
             include '../php/userFunctions.php';
-            return addUser($data);
+            return addUser($json->data);
+            break;
+        case 'log_in':
+            include '../php/userFunctions.php';
+            return logIn($json->data);
+            break;
+        case 'check_session':
+            include '../php/userFunctions.php';
+            return checkSession();
             break;
         case 'opt_in':
             include '../php/parkingFunctions.php';
-            return optIn($data);
+            return optIn($json->data);
             break;
         default:
             return array(
                 'type' => 'error',
                 'value' => 'Invalid request.',
-                'request' => $request
+                'request' => $json->request
             );
     }
 }
