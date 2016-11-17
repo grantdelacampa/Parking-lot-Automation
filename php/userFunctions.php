@@ -81,10 +81,17 @@ function logIn($data)
         session_start();
         if (session_status() == PHP_SESSION_ACTIVE){
             $_SESSION["user"] = $telephone;
-            return "Session initialized variables are set.";
+            return array(
+                'type' => 'success',
+                'value' => 'Successfully initialized user session.',
+                'session' => $_SESSION["user"]
+            );
         }
         else {
-            return "you are a failure:)";
+            return array(
+                'type' => 'error',
+                'value' => 'Can\'t initialize session.'
+            );
         }
     }
 }
