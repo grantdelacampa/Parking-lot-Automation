@@ -1,34 +1,21 @@
-
-<head>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <div class="dropdown open">
-            <button id="dropdownMenuButton" type="button" class="btn dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Menu
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" ui-sref="sign-up">Sign Up</a>
-                <a class="dropdown-item" ui-sref="log-in">Log In</a>
-                <a class="dropdown-item" ui-sref="log-out">Log Out</a>
-                <a class="dropdown-item" ui-sref="status">Status</a>
-                <a class="dropdown-item" ui-sref="records">Records</a>
-                <a class="dropdown-item" ui-sref="qr-code">QR Code</a>
-                <a class="dropdown-item" ui-sref="connected-card">Connected Card</a>
+            <div class="dropdown" ng-class="{'open': openMenu}">
+                <button id="dropdownMenuButton" type="button" class="btn dropdown-toggle"
+                        ng-click="openMenu = !openMenu">
+                    Menu
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" ui-sref="sign-up">Sign Up</a>
+                    <a class="dropdown-item" ui-sref="log-in">Log In</a>
+                    <a class="dropdown-item" ui-sref="log-out">Log Out</a>
+                    <a class="dropdown-item" ui-sref="status">Status</a>
+                    <a class="dropdown-item" ui-sref="records">Records</a>
+                    <a class="dropdown-item" ui-sref="qr-code">QR Code</a>
+                    <a class="dropdown-item" ui-sref="connected-card">Connected Card</a>
+                </div>
             </div>
-         </div>
-            </div>
+        </div>
     </div>
 </nav>
-
-<script>
-    $(document).ready(function(){
-        $(".dropdown-toggle").dropdown("toggle");
-    });
-</script>
-</body>
