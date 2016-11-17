@@ -20,42 +20,34 @@ angular
         $rootScope.session = null; // On load init this to null
         $rootScope.$on('$stateChangeStart',
             function (event, toState, toParams, fromState, fromParams, options) {
-                console.log($rootScope.session);
-                //console.log(fromState);
-                console.log(toState);
-                //console.log(event);
-                $rootScope.checkSession(fromState, toState);
-                /*if (!$rootScope.session && (toState.name != 'log-in' /!*|| toState.name != 'sign-up'*!/)) {
+                if (!$rootScope.session && !(toState.name == 'log-in' || toState.name == 'sign-up')) {
                     event.preventDefault();
-                    console.log('asdf');
                     $state.go('log-in');
-                    $rootScope.checkSession(fromState, toState);
-                    // transitionTo() promise will be rejected with
-                    // a 'transition prevented' error
-                }*/
+                    //$rootScope.checkSession(fromState, toState);
+                }
             });
         $rootScope.checkSession = function (fromState, toState) {
-        var request = {
-            method: 'POST',
-            url: config.api,
-            data: {
-                request: 'check_session',
+            var request = {
+                method: 'POST',
+                url: config.api,
                 data: {
-                    session_id: $rootScope.session
+                    request: 'check_session',
+                    data: {
+                        session_id: $rootScope.session
+                    }
                 }
-            }
-        };
-        $http(request).then(
-            function (response) {
-                //if(response.data.type == 'error' && fromState.name != 'log-in')
-                //$state.go('log-in');
-                console.log(response.data);
-                // console.log(fromState);
-                // console.log(toState);
-                //$state.go('log-in');
-            }, function (error) {
-                console.log(error);
-            }
-        );
+            };
+            $http(request).then(
+                function (response) {
+                    //if(response.data.type == 'error' && fromState.name != 'log-in')
+                    //$state.go('log-in');
+                    console.log(response.data);
+                    // console.log(fromState);
+                    // console.log(toState);
+                    //$state.go('log-in');
+                }, function (error) {
+                    console.log(error);
+                }
+            );
         };
     });

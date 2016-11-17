@@ -6,6 +6,8 @@ angular
     .controller(
         'logInController',
         function ($rootScope, $scope, $http, $state) {
+            if($rootScope.session)
+                $state.go('qr-code');
             $scope.logIn = function () {
                 var request = {
                     method: 'POST',
