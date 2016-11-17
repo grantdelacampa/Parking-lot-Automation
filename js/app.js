@@ -17,28 +17,32 @@ angular
         $httpProvider.defaults.headers.patch = {};
     })
     .run(function ($rootScope, $state, $http) {
-        $rootScope.session = null;
-        /*$rootScope.$on('$stateChangeStart',
-         function(event, toState, toParams, fromState, fromParams, options){
-         console.log($rootScope.session);
-         //console.log(fromState);
-         console.log(toState);
-         //console.log(event);
-         if(!$rootScope.session && (toState.name != 'log-in' /!*|| toState.name != 'sign-up'*!/)){
-         event.preventDefault();
-         console.log('asdf');
-         $state.go('log-in');
-         //$rootScope.checkSession(fromState, toState);
-         // transitionTo() promise will be rejected with
-         // a 'transition prevented' error
-         }
-         });*/
-        //$rootScope.checkSession = function (fromState, toState) {
+        $rootScope.session = null; // On load init this to null
+        $rootScope.$on('$stateChangeStart',
+            function (event, toState, toParams, fromState, fromParams, options) {
+                console.log($rootScope.session);
+                //console.log(fromState);
+                console.log(toState);
+                //console.log(event);
+                $rootScope.checkSession(fromState, toState);
+                /*if (!$rootScope.session && (toState.name != 'log-in' /!*|| toState.name != 'sign-up'*!/)) {
+                    event.preventDefault();
+                    console.log('asdf');
+                    $state.go('log-in');
+                    $rootScope.checkSession(fromState, toState);
+                    // transitionTo() promise will be rejected with
+                    // a 'transition prevented' error
+                }*/
+            });
+        $rootScope.checkSession = function (fromState, toState) {
         var request = {
             method: 'POST',
             url: config.api,
             data: {
-                request: 'check_session'
+                request: 'check_session',
+                data: {
+                    session_id: $rootScope.session
+                }
             }
         };
         $http(request).then(
@@ -53,5 +57,5 @@ angular
                 console.log(error);
             }
         );
-        //};
+        };
     });

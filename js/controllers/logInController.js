@@ -22,7 +22,7 @@ angular
                     function (response) {
                         console.log(response);
                         if (response.data.type == 'success') {
-                            $rootScope.session = response.data.session;
+                            $rootScope.session = response.data.session_id;
                         }
                     }, function (error) {
                         console.log(error);
