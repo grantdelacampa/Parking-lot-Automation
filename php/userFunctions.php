@@ -81,7 +81,7 @@ function logIn($data)
         );
     else {
         session_start();
-        if (session_status() == PHP_SESSION_ACTIVE){
+        if (session_status() == PHP_SESSION_ACTIVE) {
             $_SESSION['user'] = $telephone;
             return array(
                 'type' => 'success',
@@ -93,8 +93,7 @@ function logIn($data)
                     'qr_code' => $DBResponse['records'][0]['qr_code']
                 )
             );
-        }
-        else {
+        } else {
             return array(
                 'type' => 'error',
                 'value' => 'Can\'t initialize session.'
@@ -103,17 +102,17 @@ function logIn($data)
     }
 }
 
-function logOut($data){
-    if(session_status() == PHP_SESSION_ACTIVE){
-        session_unset();        //removes session variables
+function logOut($data)
+{
+    session_id($data->session_id);
+    session_start();
+    if (session_status() == PHP_SESSION_ACTIVE) {
         session_destroy();      //destroys the session
         return array(
             'type' => 'success',
             'value' => 'User session terminated'
         );
-    }
-
-    else{
+    } else {
         return array(
             'type' => 'error',
             'value' => 'No user session in progress'
