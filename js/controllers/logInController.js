@@ -4,25 +4,26 @@ angular
         'parkingLotAutomationApp' // Name of the app
     )
     .controller(
-        'signUpController',
-        function ($scope, $http) {
-            $scope.signUp = function () {
+        'logInController',
+        function ($rootScope, $scope, $http) {
+            $scope.logIn = function () {
                 var request = {
                     method: 'POST',
                     url: config.api,
                     data: {
-                        request: 'add_user',
+                        request: 'log_in',
                         data: {
-                            'email': $scope.newUser.email,
-                            'fullName': $scope.newUser.fullName,
-                            'telephone': $scope.newUser.telephone,
-                            'password': $scope.newUser.password
+                            'telephone': $scope.logIn.telephone,
+                            'password': $scope.logIn.password
                         }
                     }
                 };
                 $http(request).then(
                     function (response) {
                         console.log(response);
+                        if (response.data.type == 'success') {
+                            $rootScope.session = response.data.session;
+                        }
                     }, function (error) {
                         console.log(error);
                     }

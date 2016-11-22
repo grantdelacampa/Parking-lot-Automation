@@ -7,8 +7,7 @@
  */
 
 /**defines login details*/
-define("HOST","athena.csus.edu");
-define("USER", "zainchevsky_user");
-define("PASSWORD", "zainchevsky_db");
-define("DATABASE", "zainchevsky");
-?>
+define("HOST","php7.slavikf.com");
+define("USER", "c2csc131_pla");
+define("PASSWORD", "131CSUS#2016");
+define("DATABASE", "c2csc131_parking_automation");

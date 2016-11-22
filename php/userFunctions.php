@@ -36,3 +36,62 @@ function addUser($data)
             'db_details' => $DBResponse
         );
 }
+
+/*
+ * - Check if session is there
+ * - Return result
+ */
+function checkSession()
+{
+    if (!isset($_COOKIE['session']))
+        return array(
+            'type' => 'error',
+            'value' => 'Empty session, user is not logged in.'
+        );
+    else
+        return array(
+            'type' => 'success',
+            'value' => 'User is logged in!',
+            'session' => $_COOKIE['session']
+        );
+}
+
+/*
+ * - Check if user exists in DB table and password is correct
+ * - Return result
+ */
+function logIn($data)
+{
+    $telephone = trim($data->telephone);
+    $password = trim($data->password);
+
+    $SQLQuery = "SELECT * FROM user_table WHERE `phone_number` = '{$telephone}' AND `password` = '{$password}'";
+
+    include_once '../sql/SQL_Handler.php';
+
+    $DBResponse = read($SQLQuery); // Run query, get results
+
+    if ($DBResponse['type'] == 'error')
+        return array(
+            'type' => 'error',
+            'value' => 'No such user or wrong combination.',
+            'db_response' => $DBResponse
+        );
+    else {
+        session_start();
+        if (session_status() == PHP_SESSION_ACTIVE){
+            $_SESSION["user"] = $telephone;
+            return array(
+                'type' => 'success',
+                'value' => 'Successfully initialized user session.',
+                'session' => $_SESSION["user"]
+            );
+        }
+        else {
+            return array(
+                'type' => 'error',
+                'value' => 'Can\'t initialize session.'
+            );
+        }
+    }
+}
