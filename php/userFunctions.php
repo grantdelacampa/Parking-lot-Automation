@@ -41,9 +41,11 @@ function addUser($data)
  * - Check if session is there
  * - Return result
  */
-function checkSession()
+function checkSession($data)
 {
-    if (!isset($_COOKIE['session']))
+    session_id($data->session_id);
+    session_start();
+    if (!isset($_SESSION['user']))
         return array(
             'type' => 'error',
             'value' => 'Empty session, user is not logged in.'
@@ -52,7 +54,7 @@ function checkSession()
         return array(
             'type' => 'success',
             'value' => 'User is logged in!',
-            'session' => $_COOKIE['session']
+            'session' => $_SESSION['user']
         );
 }
 
@@ -80,11 +82,11 @@ function logIn($data)
     else {
         session_start();
         if (session_status() == PHP_SESSION_ACTIVE){
-            $_SESSION["user"] = $telephone;
+            $_SESSION['user'] = $telephone;
             return array(
                 'type' => 'success',
                 'value' => 'Successfully initialized user session.',
-                'session' => $_SESSION["user"]
+                'session_id' => session_id()
             );
         }
         else {

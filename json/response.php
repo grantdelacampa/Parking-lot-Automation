@@ -37,7 +37,7 @@ function getResponse($json)
             break;
         case 'check_session':
             include '../php/userFunctions.php';
-            return checkSession();
+            return checkSession($json->data);
             break;
         case 'opt_in':
             include '../php/parkingFunctions.php';
