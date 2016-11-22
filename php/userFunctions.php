@@ -102,3 +102,21 @@ function logIn($data)
         }
     }
 }
+
+function logOut($data){
+    if(session_status() == PHP_SESSION_ACTIVE){
+        session_unset();        //removes session variables
+        session_destroy();      //destroys the session
+        return array(
+            'type' => 'success',
+            'value' => 'User session terminated'
+        );
+    }
+
+    else{
+        return array(
+            'type' => 'error',
+            'value' => 'No user session in progress'
+        );
+    }
+}

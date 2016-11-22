@@ -43,6 +43,10 @@ function getResponse($json)
             include '../php/parkingFunctions.php';
             return clickQRCode($json->data);
             break;
+        case'log_out':
+            include '../php/parkingFunctions.php';
+            return logOut($json->data);
+            break;
         default:
             return array(
                 'type' => 'error',
