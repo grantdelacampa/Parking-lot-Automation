@@ -1,6 +1,6 @@
 <?php
 
-function optIn($data)
+function clickQRCode($data)
 {
-    return 'optIn()';
+    return 'clickQRCode()';
 }

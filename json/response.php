@@ -39,9 +39,9 @@ function getResponse($json)
             include '../php/userFunctions.php';
             return checkSession($json->data);
             break;
-        case 'opt_in':
+        case 'click_qr_code':
             include '../php/parkingFunctions.php';
-            return optIn($json->data);
+            return clickQRCode($json->data);
             break;
         default:
             return array(
