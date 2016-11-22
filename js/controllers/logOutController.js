@@ -29,5 +29,6 @@ angular
                     }
                 )
             };
+            $scope.logOut();
         }
     );
