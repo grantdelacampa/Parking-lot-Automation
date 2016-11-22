@@ -18,7 +18,7 @@ angular
     })
     .run(function ($rootScope, $state, $http) {
         $rootScope.session = null; // On load init this to null
-        $rootScope.qrCode = null;
+        $rootScope.user = null;
         $rootScope.$on('$stateChangeStart',
             function (event, toState, toParams, fromState, fromParams, options) {
                 if (!$rootScope.session && !(toState.name == 'log-in' || toState.name == 'sign-up')) {

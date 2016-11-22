@@ -25,7 +25,7 @@ angular
                         console.log(response);
                         if (response.data.type == 'success') {
                             $rootScope.session = response.data.session_id;
-                            $rootScope.qrCode = response.data.user.qr_code;
+                            $rootScope.user = response.data.user;
                             $state.go('qr-code');
                         }
                     }, function (error) {
