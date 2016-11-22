@@ -86,7 +86,12 @@ function logIn($data)
             return array(
                 'type' => 'success',
                 'value' => 'Successfully initialized user session.',
-                'session_id' => session_id()
+                'session_id' => session_id(),
+                'user' => array(
+                    'full_name' => $DBResponse['records'][0]['full_name'],
+                    'email' => $DBResponse['records'][0]['email'],
+                    'qr_code' => $DBResponse['records'][0]['qr_code']
+                )
             );
         }
         else {
