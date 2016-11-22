@@ -51,7 +51,7 @@
                             views: {
                                 'main': {
                                     templateUrl: 'pages/log-out.html',
-                                    controller: 'homeController'
+                                    controller: 'logOutController'
                                 }
                             }
                         }
