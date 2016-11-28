@@ -23,6 +23,7 @@ angular
                 $http(request).then(
                     function (response) {
                         console.log(response);
+                        $state.go('log-in');
                     }, function (error) {
                         console.log(error);
                     }
