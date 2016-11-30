@@ -22,8 +22,7 @@ function addUser($data)
     include_once '../sql/SQL_Handler.php';
 
     $DBResponse = alter($SQLQuery); // Run query, get results
-    global $link;
-    mysqli_close($link); // Must close connection
+    closeDB();
 
     if ($DBResponse['type'] == 'error') // Handle error
         return array(
@@ -74,8 +73,7 @@ function logIn($data)
     include_once '../sql/SQL_Handler.php';
 
     $DBResponse = read($SQLQuery); // Run query, get results
-    global $link;
-    mysqli_close($link); // Must close connection
+    closeDB();
 
     if ($DBResponse['type'] == 'error')
         return array(
