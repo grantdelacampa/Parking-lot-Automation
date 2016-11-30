@@ -71,7 +71,8 @@ function clickQRCode($data)
                         else {
                             return array(
                                 'type' => 'success',
-                                'value' => 'Opted-out successfully!'
+                                'value' => 'Opted-out successfully!',
+                                'do' => 'opt-out'
                             );
                         }
                     }
@@ -117,7 +118,9 @@ function clickQRCode($data)
                         else {
                             return array(
                                 'type' => 'success',
-                                'value' => 'Opted-in successfully!'
+                                'value' => 'Opted-in successfully!',
+                                'do' => 'opt-in',
+                                'parking-info' => $DBResponse['records'][0]
                             );
                         }
                     }
