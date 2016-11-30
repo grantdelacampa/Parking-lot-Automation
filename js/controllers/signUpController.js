@@ -5,7 +5,7 @@ angular
     )
     .controller(
         'signUpController',
-        function ($scope, $http, $state) {
+        function ($scope, $http, $state, $rootScope) {
             $scope.signUp = function () {
                 var request = {
                     method: 'POST',
@@ -23,7 +23,33 @@ angular
                 $http(request).then(
                     function (response) {
                         console.log(response);
-                        $state.go('log-in');
+                        var request ={
+                            method: 'POST',
+                            url: config.api,
+                            data: {
+                                request: 'log_in',
+                                data: {
+                                    'telephone': $scope.newUser.telephone,
+                                    'password': $scope.newUser.password
+                                }
+                            }
+                        };
+                        $http(request).then(
+                            function (response){
+                                console.log(response);
+                                if (response.data.type == 'success') {
+                                    $rootScope.session = response.data.session_id;
+                                    $rootScope.user = response.data.user;
+                                    $state.go('qr-code');
+                                }
+                            },
+                            function (error){
+                                console.log(error);
+                            }
+
+                        );
+
+                        //$state.go('log-in');
                     }, function (error) {
                         console.log(error);
                     }
