@@ -10,7 +10,7 @@ gulp.task('serve', function() {
     gulp.src('./')
         .pipe(plugins.webserver({
             fallback: 'index.html',
-            livereload: true,
+            //livereload: true,
             directoryListing: false,
             open: true
         }));

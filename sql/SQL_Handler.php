@@ -23,7 +23,8 @@ function read($sql_command)
     if (!$db_result) {
         $response = array(
             'type' => 'error',
-            'value' => 'Error: unable to run MySQL query.',
+            'query' => $sql_command,
+            'value' => 'Error: unable to run MySQL read query.',
             'mysqli_error' => mysqli_error($link),
             'mysqli_errno' => mysqli_errno($link)
         );
@@ -36,20 +37,21 @@ function read($sql_command)
             $response = array(
                 'type' => 'success',
                 'value' => 'Successfully got data from DB.',
+                'count' => $db_result->num_rows,
                 'records' => $records
             );
         } else {
             $response = array(
                 'type' => 'error',
-                'value' => 'Error: no record.'
+                'value' => 'Error: no record.',
+                'count' => 0,
             );
         }
     }
-    mysqli_close($link); // Must close connection
     return $response;
 }
 
-function alert($sql_command)
+function alter($sql_command)
 {
     global $link; // Using global $link
 
@@ -58,7 +60,8 @@ function alert($sql_command)
     if (!$db_result) {
         $response = array(
             'type' => 'error',
-            'value' => 'Error: unable to run MySQL query.',
+            'query' => $sql_command,
+            'value' => 'Error: unable to run MySQL alter query.',
             'mysqli_error' => mysqli_error($link),
             'mysqli_errno' => mysqli_errno($link)
         );
@@ -68,6 +71,5 @@ function alert($sql_command)
             'value' => 'Successfully changed data in DB.'
         );
     }
-    mysqli_close($link); // Must close connection
     return $response;
 }

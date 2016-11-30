@@ -17,11 +17,13 @@ function addUser($data)
     $QR_code = RandomString($cleanTelephone);
 
     $SQLQuery = "INSERT INTO user_table (`password`, `qr_code`, `email`, `full_name`, `phone_number`)"
-        . " VALUES ('$password', '$QR_code', '$email', '$fullName', '$cleanTelephone')";
+        . " VALUES ('$password', '$QR_code', '$email', '$fullName', '$cleanTelephone');";
 
     include_once '../sql/SQL_Handler.php';
 
-    $DBResponse = alert($SQLQuery); // Run query, get results
+    $DBResponse = alter($SQLQuery); // Run query, get results
+    global $link;
+    mysqli_close($link); // Must close connection
 
     if ($DBResponse['type'] == 'error') // Handle error
         return array(
@@ -67,11 +69,13 @@ function logIn($data)
     $telephone = trim($data->telephone);
     $password = trim($data->password);
 
-    $SQLQuery = "SELECT * FROM user_table WHERE `phone_number` = '{$telephone}' AND `password` = '{$password}'";
+    $SQLQuery = "SELECT * FROM user_table WHERE `phone_number` = '{$telephone}' AND `password` = '{$password}';";
 
     include_once '../sql/SQL_Handler.php';
 
     $DBResponse = read($SQLQuery); // Run query, get results
+    global $link;
+    mysqli_close($link); // Must close connection
 
     if ($DBResponse['type'] == 'error')
         return array(
