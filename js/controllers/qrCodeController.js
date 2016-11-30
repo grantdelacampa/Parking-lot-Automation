@@ -5,7 +5,7 @@ angular
     )
     .controller(
         'qrCodeController',
-        function ($rootScope, $scope, $http) {
+        function ($rootScope, $scope, $http, $state) {
             $scope.buildQRCode = function () {
                 var qrcode = new QRCode(document.getElementById('qr-code'), {
                     width: 100,
@@ -28,6 +28,8 @@ angular
                 $http(request).then(
                     function (response) {
                         console.log(response);
+                        if(response.data.do == 'opt-in')
+                            $state.go('status');
                     }, function (error) {
                         console.log(error);
                     }
