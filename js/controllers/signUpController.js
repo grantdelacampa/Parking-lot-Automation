@@ -5,7 +5,7 @@ angular
     )
     .controller(
         'signUpController',
-        function ($scope, $http) {
+        function ($scope, $http, $state) {
             $scope.signUp = function () {
                 var request = {
                     method: 'POST',
