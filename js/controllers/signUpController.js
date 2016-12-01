@@ -20,7 +20,7 @@ angular
                         }
                     }
                 };
-                //if the login is successful then being the login
+                //if the signup is successful then being the login
                 $http(request).then(
                     function (response) {
                         console.log(response);
@@ -54,6 +54,7 @@ angular
                         );
 
                         //$state.go('log-in');
+                        //if the sign up fails then bypass the login
                     }, function (error) {
                         console.log(error);
                     }
