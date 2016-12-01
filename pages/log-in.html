@@ -6,7 +6,7 @@
     </div>
     <form class="text-md-center" ng-submit="logIn()" name="logInForm" novalidate>
         <div class="form-group">
-            <input class="form-control" placeholder="1-(555)-555-5555" type="tel" required
+            <input maxlength="10" class="form-control" placeholder="1-(555)-555-5555" type="tel" required
                    ng-model="logIn.telephone">
         </div>
         <div class="form-group">
