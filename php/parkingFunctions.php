@@ -55,7 +55,7 @@ function clickQRCode($data)
                         $startDate = strtotime($startDate);
                         $currentTime = time();
                         $secondsPassed = $currentTime - $startDate;
-                        $money = $secondsPassed / 180; // 1 hour = 360 seconds = 180 * 2 = $2
+                        $money = $secondsPassed / 1800; // 1 hour = 3600 seconds = 1800 * 2 = $2
 
                         $SQLQuery4 = "UPDATE parking_journal SET `money` = '{$money}', `ts_end` = CURRENT_TIMESTAMP WHERE `id` = '{$journalID}';";
                         $DBResponse4 = alter($SQLQuery4);
