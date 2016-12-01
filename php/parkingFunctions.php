@@ -11,8 +11,7 @@ function clickQRCode($data)
     $DBResponse = read($SQLQuery);
 
     if ($DBResponse['type'] == 'error' && !isset($DBResponse['count'])) {
-        global $link;
-        mysqli_close($link); // Must close connection
+        closeDB();
         return $DBResponse;
     }
     else {
@@ -23,8 +22,7 @@ function clickQRCode($data)
             $DBResponse2 = alter($SQLQuery2);
 
             if ($DBResponse2['type'] == 'error') {
-                global $link;
-                mysqli_close($link); // Must close connection
+                closeDB();
                 return $DBResponse2;
             }
             else {
@@ -32,8 +30,7 @@ function clickQRCode($data)
                 $DBResponse3 = read($SQLQuery3);
 
                 if ($DBResponse3['type'] == 'error') {
-                    global $link;
-                    mysqli_close($link); // Must close connection
+                    closeDB();
                     return $DBResponse3;
                 }
                 else {
@@ -48,8 +45,7 @@ function clickQRCode($data)
                         }
                     }
                     if($journalID == -1) {
-                        global $link;
-                        mysqli_close($link); // Must close connection
+                        closeDB();
                         return array(
                             'type' => 'error',
                             'value' => 'Error: nothing found in parking journal table!'
@@ -63,8 +59,7 @@ function clickQRCode($data)
 
                         $SQLQuery4 = "UPDATE parking_journal SET `money` = '{$money}', `ts_end` = CURRENT_TIMESTAMP WHERE `id` = '{$journalID}';";
                         $DBResponse4 = alter($SQLQuery4);
-                        global $link;
-                        mysqli_close($link); // Must close connection
+                        closeDB();
 
                         if ($DBResponse4['type'] == 'error')
                             return $DBResponse4;
@@ -85,14 +80,12 @@ function clickQRCode($data)
             $DBResponse = read($SQLQuery);
 
             if ($DBResponse['type'] == 'error' && !isset($DBResponse['count'])) {
-                global $link;
-                mysqli_close($link); // Must close connection
+                closeDB();
                 return $DBResponse;
             }
             else {
                 if($DBResponse['count'] < 1) {
-                    global $link;
-                    mysqli_close($link); // Must close connection
+                    closeDB();
                     return array(
                         'type' => 'error',
                         'value' => 'Error: no more space available!'
@@ -103,15 +96,13 @@ function clickQRCode($data)
                     $SQLQuery2 = "UPDATE parking_spot SET `qr_code` = '{$userQRCode}', `is_taken` = 1 WHERE `id` = '{$spotID}';";
                     $DBResponse2 = alter($SQLQuery2);
                     if ($DBResponse2['type'] == 'error') {
-                        global $link;
-                        mysqli_close($link); // Must close connection
+                        closeDB();
                         return $DBResponse2;
                     }
                     else {
                         $SQLQuery3 = "INSERT INTO `parking_journal` (`id`, `money`, `qr_code`, `ts_start`, `ts_end`) VALUES (NULL, '', '{$userQRCode}', CURRENT_TIMESTAMP, NULL);";
                         $DBResponse3 = alter($SQLQuery3);
-                        global $link;
-                        mysqli_close($link); // Must close connection
+                        closeDB();
 
                         if ($DBResponse3['type'] == 'error')
                             return $SQLQuery3;
