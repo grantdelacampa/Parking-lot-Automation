@@ -6,8 +6,8 @@
                         ng-click="openMenu = !openMenu">
                     Menu
                 </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item"  ui-sref="sign-up">Sign Up</a>
+                <div ng-click="openMenu = False" class="dropdown-menu">
+                    <a class="dropdown-item" ui-sref="sign-up">Sign Up</a>
                     <a class="dropdown-item" ui-sref="log-in">Log In</a>
                     <a class="dropdown-item" ui-sref="status">Status</a>
                     <a class="dropdown-item" ui-sref="records">Records</a>
