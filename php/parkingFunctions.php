@@ -111,7 +111,8 @@ function clickQRCode($data)
                                 'type' => 'success',
                                 'value' => 'Opted-in successfully!',
                                 'do' => 'opt-in',
-                                'parking-info' => $DBResponse['records'][0]
+                                'parking_info' => $DBResponse['records'][0],
+                                'ts' => date("Y-m-d H-i-s")
                             );
                         }
                     }

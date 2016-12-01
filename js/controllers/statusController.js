@@ -6,7 +6,7 @@
         )
         .controller(
             'statusController',
-            function ($scope, $http) {
+            function ($rootScope, $scope, $http, $interval) {
                 $scope.checkStatus = function () {
                     var request = {
                         method: 'POST',
@@ -15,7 +15,6 @@
                             request: 'check_status'
                         }
                     };
-
                     $http(request).then(
                         function (response) {
                             console.log(response);
@@ -24,6 +23,11 @@
                         }
                     )
                 };
+                $scope.tick = function() {
+                    $scope.clock = Math.abs(new Date() - $rootScope.user.parkingInfo.date);
+                };
+                $scope.tick();
+                $interval($scope.tick, 1000);
             }
         );
 })();

@@ -2,8 +2,8 @@
     <h2>Status</h2>
     <br/>
     <br/>
-    <p>Your Parking time is:</p>
-    <P>Your spot is</P>
+    <p>Your Parking time is: {{clock | date:'HH:mm:ss'}}</p>
+    <P>Your spot is {{$root.user.parkingInfo.area + $root.user.parkingInfo.spot}}, floor {{$root.user.parkingInfo.floor}}</P>
     <br/>
     <a class="btn btn-primary" ui-sref="qr-code">QR Code</a>
 

@@ -99,7 +99,7 @@
                             views: {
                                 'main': {
                                     templateUrl: 'pages/status.html',
-                                    controller: 'homeController'
+                                    controller: 'statusController'
                                 }
                             }
                         }
