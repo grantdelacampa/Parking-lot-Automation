@@ -20,6 +20,9 @@ angular
                 $http(request).then(
                     function (response) {
                         console.log(response);
+                        if (response.data.type == 'success') {
+                            $scope.records = response.data.journal;
+                        }
                     }, function (error) {
                         console.log(error);
                     }
