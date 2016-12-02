@@ -121,3 +121,36 @@ function logOut($data)
         );
     }
 }
+
+function getParkingJournal($data)
+{
+
+    $userQRCode = $data->qr_code;
+
+    $SQLQuery = "SELECT * FROM parking_journal WHERE `qr_code` = '{$userQRCode}';";
+
+    include_once '../sql/SQL_Handler.php';
+
+    $DBResponse = read($SQLQuery);
+
+    closeDB();
+
+    if ($DBResponse['type'] == 'error' && !isset($DBResponse['count'])) {
+        return $DBResponse;
+    } else {
+        if ($DBResponse['count'] < 1) {
+            return array(
+                'type' => 'error',
+                'value' => 'No records.',
+                'isEmpty' => true
+            );
+        }
+        else {
+            return array(
+                'type' => 'success',
+                'value' => 'Got entries from parking journal.',
+                'journal' => $DBResponse['records']
+            );
+        }
+    }
+}
