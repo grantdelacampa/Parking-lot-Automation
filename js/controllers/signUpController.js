@@ -5,7 +5,7 @@ angular
     )
     .controller(
         'signUpController',
-        function ($scope, $http, $state, $rootScope) {
+        function ($scope, $http, $state, $rootScope, $cookies) {
             $scope.signUp = function () {
                 var request = {
                     method: 'POST',
@@ -44,6 +44,8 @@ angular
                                 if (response.data.type == 'success') {
                                     $rootScope.session = response.data.session_id;
                                     $rootScope.user = response.data.user;
+                                    $cookies.put('sessionID', $rootScope.session);
+                                    $cookies.putObject('user', $rootScope.user);
                                     $state.go('qr-code');
                                 }
                             },

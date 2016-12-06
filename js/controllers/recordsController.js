@@ -4,19 +4,16 @@ angular
         'parkingLotAutomationApp' // Name of the app
     )
     .controller(
-        'logInController',
-        function ($rootScope, $scope, $http, $state, $cookies) {
-            if($rootScope.session)
-                $state.go('qr-code');
-            $scope.logIn = function () {
+        'recordsController',
+        function ($rootScope, $scope, $http) {
+            $scope.getRecords = function () {
                 var request = {
                     method: 'POST',
                     url: config.api,
                     data: {
-                        request: 'log_in',
+                        request: 'get_records',
                         data: {
-                            'telephone': $scope.logIn.telephone,
-                            'password': $scope.logIn.password
+                            'qr_code': $rootScope.user.qr_code
                         }
                     }
                 };
@@ -24,16 +21,14 @@ angular
                     function (response) {
                         console.log(response);
                         if (response.data.type == 'success') {
-                            $rootScope.session = response.data.session_id;
-                            $rootScope.user = response.data.user;
-                            $cookies.put('sessionID', $rootScope.session);
-                            $cookies.putObject('user', $rootScope.user);
-                            $state.go('qr-code');
+                            $scope.records = response.data.journal;
                         }
                     }, function (error) {
                         console.log(error);
                     }
                 )
             };
+
+            $scope.getRecords();
         }
     );

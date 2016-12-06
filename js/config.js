@@ -87,7 +87,7 @@
                             views: {
                                 'main': {
                                     templateUrl: 'pages/records.html',
-                                    controller: 'homeController'
+                                    controller: 'recordsController'
                                 }
                             }
                         }

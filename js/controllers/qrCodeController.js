@@ -28,7 +28,7 @@ angular
                 $http(request).then(
                     function (response) {
                         console.log(response);
-                        if(response.data.do == 'opt-in') {
+                        if (response.data.do == 'opt-in') {
                             $rootScope.user.parkingInfo = response.data.parking_info;
                             $rootScope.user.parkingInfo.date = response.data.ts;
                             $state.go('status');

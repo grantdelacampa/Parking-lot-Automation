@@ -39,6 +39,10 @@ function getResponse($json)
             include '../php/userFunctions.php';
             return checkSession($json->data);
             break;
+        case 'get_records':
+            include '../php/userFunctions.php';
+            return getParkingJournal($json->data);
+            break;
         case 'click_qr_code':
             include '../php/parkingFunctions.php';
             return clickQRCode($json->data);

@@ -6,7 +6,8 @@ angular
     .module(
         'parkingLotAutomationApp', // Name of the app
         [ // Dependencies
-            'ui.router'
+            'ui.router',
+            'ngCookies'
         ]
     )
     .config(function ($httpProvider) {
@@ -16,9 +17,13 @@ angular
         $httpProvider.defaults.headers.put = {};
         $httpProvider.defaults.headers.patch = {};
     })
-    .run(function ($rootScope, $state, $http) {
+    .run(function ($rootScope, $state, $http, $cookies) {
         $rootScope.session = null; // On load init this to null
         $rootScope.user = null;
+        if($cookies.get('sessionID')){
+            $rootScope.session = $cookies.get('sessionID');
+            $rootScope.user = $cookies.getObject('user');
+        }
         $rootScope.$on('$stateChangeStart',
             function (event, toState, toParams, fromState, fromParams, options) {
                 if (!$rootScope.session && !(toState.name == 'log-in' || toState.name == 'sign-up')) {
