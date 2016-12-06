@@ -5,7 +5,7 @@ angular
     )
     .controller(
         'logInController',
-        function ($rootScope, $scope, $http, $state) {
+        function ($rootScope, $scope, $http, $state, $cookies) {
             if($rootScope.session)
                 $state.go('qr-code');
             $scope.logIn = function () {
@@ -26,6 +26,8 @@ angular
                         if (response.data.type == 'success') {
                             $rootScope.session = response.data.session_id;
                             $rootScope.user = response.data.user;
+                            $cookies.put('sessionID', $rootScope.session);
+                            $cookies.putObject('user', $rootScope.user);
                             $state.go('qr-code');
                         }
                     }, function (error) {
