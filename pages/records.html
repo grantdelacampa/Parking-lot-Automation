@@ -11,7 +11,7 @@
         <tbody>
         <tr ng-repeat="item in records">
             <th scope="row">{{$index + 1}}</th>
-            <td>{{item.ts_end | date:'MMM dd, yy @ hh a'}}</td>
+            <td>{{item.ts_end | date:'MMM dd, yy @ hh a'}}</td><!--http://stackoverflow.com/questions/20709910/unable-to-format-default-mysql-datetime-->
             <td>{{item.money | currency}}</td>
         </tr>
         </tbody>
