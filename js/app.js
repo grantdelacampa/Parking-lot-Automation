@@ -46,11 +46,7 @@ angular
             $http(request).then(
                 function (response) {
                     //if(response.data.type == 'error' && fromState.name != 'log-in')
-                    //$state.go('log-in');
                     console.log(response.data);
-                    // console.log(fromState);
-                    // console.log(toState);
-                    //$state.go('log-in');
                 }, function (error) {
                     console.log(error);
                 }

@@ -2,9 +2,11 @@
     <h2>Status</h2>
     <br/>
     <br/>
-    <p>Your Parking time is: {{clock | millisecondsToTime}}</p>
-    <P>Your spot is {{$root.user.parkingInfo.area + $root.user.parkingInfo.spot}}, floor {{$root.user.parkingInfo.floor}}</P>
+    <p ng-show="$root.user.parkingInfo">Your Parking time is: {{clock | millisecondsToTime}}</p>
+    <p ng-show="$root.user.parkingInfo">
+        Your spot is {{$root.user.parkingInfo.area + $root.user.parkingInfo.spot}}, floor {{$root.user.parkingInfo.floor}}
+    </p>
+    <p ng-hide="$root.user.parkingInfo">You didn't opt-in yet, please go to QR Code page.</p>
     <br/>
     <a class="btn btn-primary" ui-sref="qr-code">QR Code</a>
-
 </div>
