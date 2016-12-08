@@ -12,7 +12,7 @@
         <tr ng-repeat="item in records">
             <th scope="row">{{$index + 1}}</th>
             <td ng-show="item.ts_end">{{item.ts_end | date:'MMM dd, yy @ hh a'}}</td>
-            <td ng-hide="item.ts_end"><a ui-sref="status">Check status...</a></td>
+            <td ng-hide="item.ts_end"><a ui-sref="status">In progress, check status...</a></td>
             <td>{{item.money | currency}}</td>
         </tr>
         </tbody>
