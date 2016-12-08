@@ -50,7 +50,7 @@ angular
             $scope.startTimer = function () {
                 if (!angular.isDefined(timer))
                     timer = $interval(function () {
-                        $rootScope.checkParkingStatus();
+                        $rootScope.checkParkingStatus(true);
                     }, 5000);
             };
 
@@ -60,7 +60,7 @@ angular
             });
 
             $scope.buildQRCode();
-            $rootScope.checkParkingStatus();
+            $rootScope.checkParkingStatus(true);
             $scope.startTimer();
         }
     );
