@@ -14,8 +14,8 @@
                             url: '/',
                             views: {
                                 'main': {
-                                    templateUrl: 'pages/sign-up.html',
-                                    controller: 'homeController'
+                                    templateUrl: 'pages/log-in.html',
+                                    controller: 'logInController'
                                 }
                             }
                         }

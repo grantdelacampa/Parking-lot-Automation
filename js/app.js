@@ -52,6 +52,34 @@ angular
                 }
             );
         };
+
+        $rootScope.checkParkingStatus = function () {
+            var request = {
+                method: 'POST',
+                url: config.api,
+                data: {
+                    request: 'check_parking_status',
+                    data: {
+                        'qr_code': $rootScope.user.qr_code
+                    }
+                }
+            };
+            $http(request).then(
+                function (response) {
+                    console.log(response);
+                    if (response.data.parking_info) {
+                        $rootScope.user.parkingInfo = response.data.parking_info;
+                        $rootScope.user.parkingInfo.date = response.data.parking_info.ts_start;
+                    }
+                    else {
+                        $rootScope.user.parkingInfo = null;
+                    }
+                }, function (error) {
+                    console.log(error);
+                }
+            )
+        };
+
     })
     .filter('millisecondsToTime', function () {
         return function (milliseconds) {

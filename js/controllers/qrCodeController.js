@@ -5,7 +5,10 @@ angular
     )
     .controller(
         'qrCodeController',
-        function ($rootScope, $scope, $http, $state) {
+        function ($rootScope, $scope, $http, $state, $interval) {
+
+            var timer = undefined;
+
             $scope.buildQRCode = function () {
                 var qrcode = new QRCode(document.getElementById('qr-code'), {
                     width: 250,
@@ -13,6 +16,7 @@ angular
                 });
                 qrcode.makeCode('http://csc131.slavikf.com/api/json/qr-hit.php?qr_code=' + $rootScope.user.qr_code);
             };
+
             $scope.clickQRCode = function () {
                 var request = {
                     method: 'POST',
@@ -43,6 +47,20 @@ angular
                 )
             };
 
+            $scope.startTimer = function () {
+                if (!angular.isDefined(timer))
+                    timer = $interval(function () {
+                        $rootScope.checkParkingStatus();
+                    }, 5000);
+            };
+
+            $scope.$on('$destroy', function(){
+                $interval.cancel(timer);
+                timer = undefined;
+            });
+
             $scope.buildQRCode();
+            $rootScope.checkParkingStatus();
+            $scope.startTimer();
         }
     );

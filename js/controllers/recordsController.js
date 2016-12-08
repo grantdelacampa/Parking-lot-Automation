@@ -30,5 +30,6 @@ angular
             };
 
             $scope.getRecords();
+            $rootScope.checkParkingStatus();
         }
     );
