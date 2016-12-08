@@ -6,6 +6,8 @@ angular
     .controller(
         'signUpController',
         function ($scope, $http, $state, $rootScope, $cookies) {
+            if($rootScope.session)
+                $state.go('qr-code');
             $scope.signUp = function () {
                 var request = {
                     method: 'POST',
