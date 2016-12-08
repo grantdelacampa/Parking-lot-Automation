@@ -8,8 +8,8 @@ angular
         function ($rootScope, $scope, $http, $state) {
             $scope.buildQRCode = function () {
                 var qrcode = new QRCode(document.getElementById('qr-code'), {
-                    width: 100,
-                    height: 100
+                    width: 150,
+                    height: 150
                 });
                 qrcode.makeCode($rootScope.user.qr_code);
             };
@@ -32,6 +32,10 @@ angular
                             $rootScope.user.parkingInfo = response.data.parking_info;
                             $rootScope.user.parkingInfo.date = response.data.ts;
                             $state.go('status');
+                        }
+                        if (response.data.do == 'opt-out') {
+                            $rootScope.user.parkingInfo = null;
+                            $state.go('records');
                         }
                     }, function (error) {
                         console.log(error);
