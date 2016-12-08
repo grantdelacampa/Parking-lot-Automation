@@ -1,5 +1,8 @@
 <div class="text-xs-center">
     <h2>QR Code</h2>
+    <br>
+    <h3>You are <strong>opt-{{$root.user.parkingInfo ? 'in':'out'}}</strong></h3>
+    <br>
     <p>Please scan your QR code to <strong>opt-{{$root.user.parkingInfo ? 'out':'in'}}</strong>.</p>
     <br>
     <div id="qr-code" ng-click="clickQRCode()"></div>
