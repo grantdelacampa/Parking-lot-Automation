@@ -4,7 +4,9 @@
     <br>
     <div id="qr-code" ng-click="clickQRCode()"></div>
     <br>
-    <br>
     <p>Or use your ID: </p>
     <strong>{{$root.user.qr_code}}</strong>
+    <br>
+    <br>
+    <p ng-show="$root.user.parkingInfo">You're already opted-in, <a ui-sref="status">click to check your status</a>.</p>
 </div>
