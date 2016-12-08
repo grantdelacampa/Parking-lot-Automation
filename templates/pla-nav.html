@@ -7,8 +7,8 @@
                     Menu
                 </button>
                 <div ng-click="openMenu = false" class="dropdown-menu">
-                    <a class="dropdown-item" ui-sref="sign-up">Sign Up</a>
-                    <a class="dropdown-item" ui-sref="log-in">Log In</a>
+                    <a class="dropdown-item" ui-sref="sign-up" ng-hide="$root.user">Sign Up</a>
+                    <a class="dropdown-item" ui-sref="log-in" ng-hide="$root.user">Log In</a>
                     <a class="dropdown-item" ui-sref="status" ng-show="$root.user">Status</a>
                     <a class="dropdown-item" ui-sref="records" ng-show="$root.user">Records</a>
                     <a class="dropdown-item" ui-sref="qr-code" ng-show="$root.user">QR Code</a>
