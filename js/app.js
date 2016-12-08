@@ -53,7 +53,7 @@ angular
             );
         };
 
-        $rootScope.checkParkingStatus = function () {
+        $rootScope.checkParkingStatus = function (isRedirectNeeded) {
             var request = {
                 method: 'POST',
                 url: config.api,
@@ -70,6 +70,7 @@ angular
                     if (response.data.parking_info) {
                         $rootScope.user.parkingInfo = response.data.parking_info;
                         $rootScope.user.parkingInfo.date = response.data.parking_info.ts_start;
+                        $state.go('status');
                     }
                     else {
                         $rootScope.user.parkingInfo = null;
