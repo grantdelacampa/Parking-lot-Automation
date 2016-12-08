@@ -8,10 +8,10 @@ angular
         function ($rootScope, $scope, $http, $state) {
             $scope.buildQRCode = function () {
                 var qrcode = new QRCode(document.getElementById('qr-code'), {
-                    width: 150,
-                    height: 150
+                    width: 250,
+                    height: 250
                 });
-                qrcode.makeCode($rootScope.user.qr_code);
+                qrcode.makeCode('http://csc131.slavikf.com/api/json/qr-hit.php?qr_code=' + $rootScope.user.qr_code);
             };
             $scope.clickQRCode = function () {
                 var request = {
