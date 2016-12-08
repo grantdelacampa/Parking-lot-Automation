@@ -1,20 +1,12 @@
-<div>
-    <div class="text-md-center">
-        <h2>QR Code</h2>
-    </div>
-    <div class="text-md-center">
-        <p>
-            Please scan your QR code
-        </p>
-    </div>
+<div class="text-xs-center">
+    <h2>QR Code</h2>
+    <p>Please scan your QR code</p>
     <br>
     <br>
     <div id="qr-code" ng-click="clickQRCode()"></div>
     <br>
     <br>
     <br>
-    <div class="text-md-center">
-        <p>Or use your ID: </p>
-        <strong>{{$root.user.qr_code}}</strong>
-    </div>
+    <p>Or use your ID: </p>
+    <strong>{{$root.user.qr_code}}</strong>
 </div>

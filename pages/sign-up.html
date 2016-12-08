@@ -1,8 +1,6 @@
-<div>
-    <div class="text-md-center">
-        <h2>Sign Up</h2>
-    </div>
-    <form class="text-md-center" ng-submit="signUp()" name="newUserForm" novalidate>
+<div class="text-xs-center">
+    <h2>Sign Up</h2>
+    <form ng-submit="signUp()" name="newUserForm" novalidate>
         <div class="form-group">
             <input class="form-control" placeholder="email@example.com" type="email" required
                    ng-model="newUser.email">
@@ -26,7 +24,6 @@
         </div>
         <div class="form-group">
             <h5>or <a ui-sref="log-in">Log In</a></h5>
-
         </div>
     </form>
 </div>
