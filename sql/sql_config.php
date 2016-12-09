@@ -7,7 +7,7 @@
  */
 
 /**defines login details*/
-define("HOST","php7.slavikf.com");
-define("USER", "c2csc131_pla");
-define("PASSWORD", "131CSUS#2016");
-define("DATABASE", "c2csc131_parking_automation");
+define("HOST","HOST");
+define("USER", "USER");
+define("PASSWORD", "PASSWORD");
+define("DATABASE", "DATABASE");
