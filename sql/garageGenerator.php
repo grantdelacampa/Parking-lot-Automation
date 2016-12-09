@@ -27,17 +27,13 @@ $floors = 4;
 $spots = 100;
 connectToDB();
 
-for ($i=1; $i <= $floors; $i++){
-    //$time_start = microtime(true); //start timer
-        for ($k=1;$k<=$spots; $k++){
-            $letter= toLetter($k); //converts the spot count to quadrants then to its corresponding letter
-            $SQLQuery = "INSERT INTO parking_spot (`floor`, `spot`, `area`)"
+for ($i = 1; $i <= $floors; $i++) {
+    for ($k = 1; $k <= $spots; $k++) {
+        $letter = toLetter($k); //converts the spot count to quadrants then to its corresponding letter
+        $SQLQuery = "INSERT INTO parking_spot (`floor`, `spot`, `area`)"
             . " VALUES ('$i', '$k', '$letter')";  //builds database
-            $link->query($SQLQuery);
-        }
-    //$time_end = microtime(true); //end timer
-    //$execution_time = $time_end - $time_start; //calculate run time
-    //echo "<br>" . 'Execution time:  '.$execution_time . "<br>";
+        $link->query($SQLQuery);
+    }
 }
 
 closeDB();
